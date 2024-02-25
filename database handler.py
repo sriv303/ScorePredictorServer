@@ -62,12 +62,12 @@ X_train, X_test, y_train_wicket, y_test_wicket = train_test_split(X, y_wicket, t
 # Model pipelines
 pipeline_runs = Pipeline([
     ('preprocessor', preprocessor),
-    ('regressor', RandomForestRegressor(random_state=42))
+    ('regressor', RandomForestRegressor(random_state=42, n_jobs=-1))
 ])
 
 pipeline_wicket = Pipeline([
     ('preprocessor', preprocessor),
-    ('classifier', RandomForestClassifier(random_state=42))
+    ('classifier', RandomForestClassifier(random_state=42, n_jobs=-1))
 ])
 
 now = datetime.now()
