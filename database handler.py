@@ -137,10 +137,11 @@ def simulate_over(striker, non_striker, bowler, df):
         runs, wicket = simulate_ball(striker, bowler, df)
         print(f"Ball {ball}: Runs - {runs}, Wicket - {'Yes' if wicket else 'No'}")
         
-        total_runs += runs
         if wicket:
             wickets += 1
-            break  # Stopping the simulation if a wicket is taken
+            total_runs += runs
+
+            #break  # Stopping the simulation if a wicket is taken
 
         if runs % 2 != 0:  # Switching strikers on odd runs
             striker, non_striker = non_striker, striker
