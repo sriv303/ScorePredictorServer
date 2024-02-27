@@ -1,0 +1,250 @@
+id,name,country,isBowler,isBatsman,runsScoredPerBall,dismissedPerBall,wicketsPerBall,runsConcededPerBall
+1,A Balbirnie,Ireland,0,1,0.7917,0.0223,,
+2,AD Hales,England,0,1,0.9108,0.0308,,
+3,AD Mathews,Sri Lanka,0,1,0.7308,0.0237,0.0297,0.6436
+4,AJ Finch,Australia,0,1,0.844,0.0215,0.0161,0.9435
+5,AK Markram,South Africa,0,1,0.837,0.0257,0.0158,0.9267
+8,AT Carey,Australia,0,1,0.8539,0.0227,,
+9,AT Nidamanuru,Netherlands,0,1,1.0373,0.0683,,1.3333
+10,AT Rayudu,India,0,1,0.8822,0.0287,,1.0
+11,Aarif Sheikh,Nepal,0,1,0.572,0.0329,,1.0725
+12,Aasif Sheikh,Nepal,0,1,0.6271,0.0315,,
+13,Afif Hossain,Bangladesh,0,1,0.7434,0.0241,0.0238,1.2143
+14,Asghar Stanikzai,Afghanistan,0,1,0.7465,0.0233,,0.2
+15,BA King,West Indies,0,1,0.7441,0.0446,,
+16,BA Stokes,England,0,1,0.8824,0.0203,0.0175,0.9011
+17,BFW de Leede,Netherlands,0,1,0.6092,0.0243,0.022,0.939
+18,BJ McMullen,Scotland,0,1,0.7083,0.0096,0.0302,0.5995
+19,BKG Mendis,Sri Lanka,0,1,0.807,0.0299,,
+20,BRM Taylor,Zimbabwe,0,1,0.8158,0.0201,,
+21,Babar Azam,Pakistan,0,1,0.8352,0.0151,,
+22,C Campher,Ireland,0,1,0.8081,0.0204,0.0319,0.8554
+23,C Munro,New Zealand,0,1,0.9593,0.0489,0.0172,0.8252
+24,C de Grandhomme,New Zealand,0,1,1.0862,0.0493,0.0164,0.73
+25,CH Gayle,West Indies,0,1,1.0013,0.0239,0.0135,0.7838
+26,CR Ervine,Zimbabwe,0,1,0.7264,0.0179,,
+28,CS MacLeod,Scotland,0,1,0.8579,0.0167,,
+29,DA Miller,South Africa,0,1,1.0164,0.0236,,
+30,DA Warner,Australia,0,1,0.9043,0.0213,,
+31,DJ Malan,England,0,1,0.8728,0.0127,,
+32,DJ Mitchell,New Zealand,0,1,0.9315,0.0223,0.037,0.8889
+33,DM Bravo,West Indies,0,1,0.6757,0.0309,,
+35,DP Conway,New Zealand,0,1,0.796,0.0152,,
+37,E Lewis,West Indies,0,1,0.7651,0.0201,,
+38,EJG Morgan,England,0,1,0.9288,0.0235,,
+39,F du Plessis,South Africa,0,1,0.8717,0.0152,,
+40,FDM Karunaratne,Sri Lanka,0,1,0.7697,0.0207,,
+41,FH Allen,New Zealand,0,1,0.8983,0.0339,,
+42,Fakhar Zaman,Pakistan,0,1,0.9028,0.023,0.0175,0.9123
+43,G Malla,Nepal,0,1,0.7125,0.0333,,2.0
+45,GJ Maxwell,Australia,0,1,1.2722,0.0287,0.0145,0.9265
+47,H Klaasen,South Africa,0,1,1.2158,0.0338,,1.1667
+48,H Masakadza,Zimbabwe,0,1,0.6269,0.0385,0.0238,1.0952
+49,HE van der Dussen,South Africa,0,1,0.871,0.0149,0.1667,0.5
+50,HG Munsey,Scotland,0,1,0.8655,0.0241,,
+52,HM Amla,South Africa,0,1,0.8127,0.0197,,
+53,HM Nicholls,New Zealand,0,1,0.7691,0.0247,,
+54,HT Tector,Ireland,0,1,0.808,0.0179,0.0123,0.9383
+55,Haris Sohail,Pakistan,0,1,0.8075,0.0195,0.0058,0.9306
+56,Hashmatullah Shahidi,Afghanistan,0,1,0.6562,0.0198,,
+57,Ibrahim Zadran,Afghanistan,0,1,0.8129,0.0152,,
+58,Imad Wasim,Pakistan,0,1,1.0648,0.0205,0.0108,0.8493
+59,Imam-ul-Haq,Pakistan,0,1,0.7697,0.019,,
+60,Imrul Kayes,Bangladesh,0,1,0.7862,0.0166,,
+61,Ishan Kishan,India,0,1,1.0108,0.0197,,
+62,JC Buttler,England,0,1,1.1268,0.034,,
+64,JE Root,England,0,1,0.8393,0.0182,0.0178,0.9244
+65,JJ Roy,England,0,1,1.0323,0.0275,,
+67,JM Bairstow,England,0,1,1.0137,0.0241,,
+68,JM Vince,England,0,1,0.7162,0.0338,0.0233,0.8605
+69,JN Loftie-Eaton,Namibia,0,1,0.7181,0.0479,0.0495,1.1485
+70,JN Malan,South Africa,0,1,0.8535,0.0171,,
+72,K Bhurtel,Nepal,0,1,0.9375,0.0362,,1.0556
+73,KIC Asalanka,Sri Lanka,0,1,0.7792,0.0208,0.0108,0.8387
+74,KJ Coetzer,Scotland,0,1,0.6542,0.0249,,0.7
+75,KJ O'Brien,Ireland,0,1,0.8146,0.0375,0.0078,0.6667
+76,KL Rahul,India,0,1,0.837,0.0156,,
+77,KM Jadhav,India,0,1,0.9019,0.0271,0.0179,0.8446
+78,KR Mayers,West Indies,0,1,0.8799,0.0277,0.0159,0.881
+79,KS Williamson,New Zealand,0,1,0.7093,0.0147,0.0201,0.6734
+80,Kushal Malla,Nepal,0,1,0.9268,0.0488,0.0079,0.9213
+81,L Louwrens,Namibia,0,1,0.6121,0.0345,,
+82,L Tucker,Ireland,0,1,0.6926,0.0439,,
+83,LD Chandimal,Sri Lanka,0,1,0.7222,0.0287,,
+84,LRPL Taylor,New Zealand,0,1,0.8556,0.0141,,
+85,Liton Das,Bangladesh,0,1,0.8347,0.0292,,
+86,M Labuschagne,Australia,0,1,0.8488,0.0226,0.0078,1.0698
+87,M van Lingen,Namibia,0,1,0.8775,0.0158,0.0435,1.0435
+89,MD Gunathilaka,Sri Lanka,0,1,0.7761,0.0236,0.0154,0.8154
+90,MD Shanaka,Sri Lanka,0,1,0.807,0.0431,0.0237,0.9507
+91,MDKJ Perera,Sri Lanka,0,1,0.904,0.0221,,
+92,MG Bracewell,New Zealand,0,1,1.1654,0.0231,0.0163,0.8554
+93,MG Erasmus,Namibia,0,1,0.7016,0.02,0.0227,0.9091
+94,MH Cross,Scotland,0,1,0.6715,0.024,,
+95,MJ Guptill,New Zealand,0,1,0.8041,0.027,,
+98,MP O'Dowd,Netherlands,0,1,0.7663,0.0211,,0.6842
+100,MR Marsh,Australia,0,1,0.9034,0.0276,0.0265,0.7876
+101,MS Dhoni,India,0,1,0.7449,0.0216,,
+102,Mahmudullah,Bangladesh,0,1,0.7293,0.0167,0.0188,0.9498
+104,Mohammad Hafeez,Pakistan,0,1,0.8567,0.0287,0.0072,0.8966
+105,Mohammad Mithun,Bangladesh,0,1,0.6897,0.0304,,0.7692
+107,Mohammad Rizwan,Pakistan,0,1,0.7432,0.0195,,
+108,Mohammad Shahzad,Afghanistan,0,1,0.9293,0.0268,,
+109,Mushfiqur Rahim,Bangladesh,0,1,0.8061,0.0163,,
+110,N Dickwella,Sri Lanka,0,1,0.948,0.0369,,
+111,N Pooran,West Indies,0,1,0.9085,0.0251,0.0319,0.9362
+113,Najibullah Zadran,Afghanistan,0,1,0.9316,0.0309,,
+114,Nazmul Hossain Shanto,Bangladesh,0,1,0.7189,0.0237,0.0263,0.9474
+115,P Nissanka,Sri Lanka,0,1,0.7755,0.0267,,
+116,PR Stirling,Ireland,0,1,0.7612,0.0203,0.0192,0.6923
+118,Q de Kock,South Africa,0,1,0.9614,0.0215,,
+119,R Powell,West Indies,0,1,0.7856,0.0371,0.0122,0.9512
+121,RD Berrington,Scotland,0,1,0.6684,0.0233,0.0286,0.781
+122,RG Sharma,India,0,1,0.9505,0.0167,,
+123,RK Paudel,Nepal,0,1,0.669,0.0255,,0.7297
+125,RP Burl,Zimbabwe,0,1,0.8008,0.0276,0.0203,0.9494
+126,RR Hendricks,South Africa,0,1,0.7457,0.0275,0.0238,1.119
+127,RR Pant,India,0,1,1.0755,0.0252,,
+128,RW Chakabva,Zimbabwe,0,1,0.8672,0.0226,,
+129,Rahmanullah Gurbaz,Afghanistan,0,1,0.7684,0.0265,,
+130,Rahmat Shah,Afghanistan,0,1,0.7088,0.0219,0.0148,1.1333
+132,S Dhawan,India,0,1,0.8643,0.017,,
+133,S Samarawickrama,Sri Lanka,0,1,0.8418,0.0264,,
+134,SA Edwards,Netherlands,0,1,0.9299,0.0226,,
+135,SA Yadav,India,0,1,0.9962,0.0305,,
+137,SD Hope,West Indies,0,1,0.7323,0.0167,,
+138,SE Marsh,Australia,0,1,0.9024,0.0174,,
+139,SO Hetmyer,West Indies,0,1,1.0263,0.0344,,
+140,SPD Smith,Australia,0,1,0.8409,0.0189,0.0323,1.2581
+141,SS Iyer,India,0,1,0.9154,0.0231,,1.1111
+142,SSJ Brooks,West Indies,0,1,0.6718,0.027,,
+143,Sarfraz Ahmed,Pakistan,0,1,0.8525,0.0292,,
+146,Shoaib Malik,Pakistan,0,1,0.7679,0.0302,0.0108,0.9086
+147,Shubman Gill,India,0,1,0.9624,0.0164,,
+150,Soumya Sarkar,Bangladesh,0,1,0.9453,0.0365,0.0325,0.9578
+151,T Bavuma,South Africa,0,1,0.8885,0.0197,,0.5946
+152,TM Head,Australia,0,1,0.9349,0.025,0.0092,1.0413
+153,TWM Latham,New Zealand,0,1,0.8694,0.0255,,
+154,Tamim Iqbal,Bangladesh,0,1,0.7114,0.0191,,
+155,UT Khawaja,Australia,0,1,0.8021,0.0162,,
+156,V Kohli,India,0,1,0.9495,0.0181,,
+157,Vikramjit Singh,Netherlands,0,1,0.7126,0.0258,0.0385,1.1154
+158,W Madhevere,Zimbabwe,0,1,0.8761,0.0254,0.0133,0.8267
+159,WA Young,New Zealand,0,1,0.8795,0.0256,,
+160,WIA Fernando,Sri Lanka,0,1,0.9223,0.0275,,
+161,WTS Porterfield,Ireland,0,1,0.6227,0.0258,,
+162,WU Tharanga,Sri Lanka,0,1,0.7662,0.0278,,
+163,ZE Green,Namibia,0,1,0.8411,0.0265,,
+164,A Dananjaya,Sri Lanka,1,0,0.7374,0.0838,0.0265,0.8134
+165,A Nortje,South Africa,1,0,0.6,0.075,0.0305,1.0064
+166,A Zampa,Australia,1,0,0.6508,0.0794,0.0305,0.9075
+167,AJ Hosein,West Indies,1,0,0.5063,0.0438,0.0268,0.7842
+168,AL Phehlukwayo,South Africa,1,0,0.8275,0.042,0.0292,0.8711
+169,AR McBrine,Ireland,1,0,0.6866,0.0291,0.02,0.7267
+170,AS Joseph,West Indies,1,0,0.5439,0.0468,0.0252,0.755
+171,AU Rashid,England,1,0,0.8025,0.063,0.0259,0.9256
+172,B Kumar,India,1,0,0.7371,0.0388,0.0273,0.8012
+173,B Muzarabani,Zimbabwe,1,0,0.4242,0.0707,0.0257,0.7488
+174,BJ McCarthy,Ireland,1,0,0.5484,0.0645,0.0293,0.9531
+175,BM Scholtz,Namibia,1,0,0.6818,0.0682,0.0241,0.6622
+176,CA Young,Ireland,1,0,0.6809,0.1277,0.023,0.89
+177,CAK Rajitha,Sri Lanka,1,0,0.5,0.08,0.0313,0.8912
+178,CB Sole,Scotland,1,0,1,0.1071,0.0243,0.7301
+179,CBRLS Kumara,Sri Lanka,1,0,0.3953,0.0698,0.0261,0.9496
+180,CR Woakes,England,1,0,0.9723,0.0327,0.0283,0.8034
+181,DJ Willey,England,1,0,1.0128,0.0256,0.0267,0.8259
+182,DM de Silva,Sri Lanka,1,0,0.7504,0.0248,0.0214,0.8084
+183,DS Airee,Nepal,1,0,0.7511,0.0343,0.0114,0.7346
+184,Dawlat Zadran,Afghanistan,1,0,0.6164,0.0548,0.0179,0.8869
+185,FJ Klaassen,Netherlands,1,0,0.4167,0.0833,0.0263,0.6244
+186,Fazalhaq Farooqi,Afghanistan,1,0,0.25,0.05,0.0295,0.924
+187,GH Dockrell,Ireland,1,0,0.8534,0.0297,0.0236,0.9309
+188,GT Main,Scotland,1,0,1.0811,,0.0391,0.8359
+189,Gulbadin Naib,Afghanistan,1,0,0.6801,0.0353,0.0227,0.8929
+190,HH Pandya,India,1,0,0.9642,0.0331,0.0239,0.8905
+191,HR Walsh,West Indies,1,0,0.734,0.0532,0.0259,0.904
+192,Hamza Tahir,Scotland,1,0,0.1111,0.0278,0.0349,0.9012
+193,Haris Rauf,Pakistan,1,0,0.4545,0.1818,0.026,0.8687
+194,Hasan Ali,Pakistan,1,0,1.156,0.078,0.0194,1.0056
+195,IS Sodhi,New Zealand,1,0,0.8947,0.0702,0.0235,0.9156
+196,Imran Tahir,South Africa,1,0,0.7619,0.0952,0.0242,0.82
+197,J Little,Ireland,1,0,1.0213,0.1277,0.0249,0.972
+198,JA Richardson,Australia,1,0,1.4444,,0.032,0.9083
+199,JC Archer,England,1,0,0.6923,0.1154,0.0274,0.7493
+200,JDS Neesham,New Zealand,1,0,0.9865,0.027,0.0294,0.8909
+201,JJ Bumrah,India,1,0,0.5926,0.037,0.0258,0.7156
+202,JJ Smit,Namibia,1,0,0.7234,0.0355,,0.5714
+203,JN Frylinck,Namibia,1,0,0.8983,0.0339,0.0455,0.5227
+204,JO Holder,West Indies,1,0,0.8166,0.0342,0.0195,0.8846
+205,JR Hazlewood,Australia,1,0,0.8727,0.0364,0.0238,0.7819
+206,K Rabada,South Africa,1,0,0.8467,0.073,0.0259,0.7614
+207,KA Maharaj,South Africa,1,0,0.8261,0.0725,0.0224,0.7644
+208,KAJ Roach,West Indies,1,0,0.3133,0.0482,0.0165,0.8367
+209,KM Jarvis,Zimbabwe,1,0,0.83,0.07,0.0251,0.8519
+210,KMA Paul,West Indies,1,0,0.8647,0.0529,0.0184,0.9459
+211,Karan KC,Nepal,1,0,1.0638,0.0426,0.0364,0.961
+212,Kuldeep Yadav,India,1,0,0.5798,0.0372,0.0271,0.8712
+213,L Ngidi,South Africa,1,0,0.5652,0.0435,0.0296,0.9188
+214,LE Plunkett,England,1,0,1.3077,0.0385,0.0304,0.8423
+215,LH Ferguson,New Zealand,1,0,0.5083,0.075,0.0283,0.8305
+216,LN Rajbanshi,Nepal,1,0,0.7895,0.1053,0.0256,0.8168
+217,LV van Beek,Netherlands,1,0,0.8616,0.044,0.0307,0.7239
+218,M Prasidh Krishna,India,1,0,0.1,0.1,0.0357,0.8429
+219,M Theekshana,Sri Lanka,1,0,0.4409,0.043,0.0249,0.7388
+220,MA Leask,Scotland,1,0,1.2597,0.0233,0.0295,0.9008
+221,MA Starc,Australia,1,0,0.8766,0.0519,0.0326,0.8498
+222,MA Wood,England,1,0,0.4545,0.0909,0.0228,0.8531
+223,MJ Henry,New Zealand,1,0,0.7639,0.1111,0.0287,0.7376
+224,MJ Santner,New Zealand,1,0,0.8796,0.0301,0.0176,0.7689
+225,MM Ali,England,1,0,0.8053,0.0479,0.0175,0.9004
+226,MP Stoinis,Australia,1,0,0.9444,0.0442,0.0239,0.9338
+227,MR Adair,Ireland,1,0,0.9693,0.0613,0.0255,0.8333
+228,MRJ Watt,Scotland,1,0,0.8919,0.0541,0.0273,0.6864
+229,Mashrafe Mortaza,Bangladesh,1,0,0.882,0.0618,0.0158,0.8752
+230,Mehedi Hasan Miraz,Bangladesh,1,0,0.7025,0.0346,0.0189,0.7757
+231,Mohammad Amir,Pakistan,1,0,0.5821,0.0597,0.0275,0.8005
+232,Mohammad Nabi,Afghanistan,1,0,0.7824,0.0321,0.0185,0.7054
+233,Mohammad Nawaz (3),Pakistan,1,0,0.5743,0.0792,0.0211,0.8195
+234,Mohammad Saifuddin,Bangladesh,1,0,0.7724,0.0325,0.0206,0.9519
+235,Mohammed Shami,India,1,0,0.9355,0.129,0.0298,0.8842
+236,Mohammed Siraj,India,1,0,0.4118,0.0588,0.0389,0.7297
+237,Mujeeb Ur Rahman,Afghanistan,1,0,0.7089,0.0886,0.0224,0.6554
+238,Mustafizur Rahman,Bangladesh,1,0,0.5932,0.0763,0.0279,0.8387
+239,N Pradeep,Sri Lanka,1,0,0.75,0.05,0.0247,0.966
+240,NLTC Perera,Sri Lanka,1,0,1.1548,0.0445,0.0257,0.9503
+241,Naseem Shah,Pakistan,1,0,0.6563,,0.039,0.705
+242,O Thomas,West Indies,1,0,0.3611,0.1111,0.0289,1.0232
+243,PJ Cummins,Australia,1,0,0.9737,0.0921,0.028,0.7615
+244,PVD Chameera,Sri Lanka,1,0,0.6392,0.0412,0.0283,0.7525
+245,PWH de Silva,Sri Lanka,1,0,0.9678,0.0421,0.0187,0.8447
+246,R Ngarava,Zimbabwe,1,0,0.3929,0.1429,0.0231,0.808
+247,R Trumpelmann,Namibia,1,0,0.9298,0.1228,0.0396,0.7256
+248,RA Jadeja,India,1,0,0.8524,0.0242,0.0201,0.8402
+249,RL Chase,West Indies,1,0,0.7231,0.0273,0.0171,0.8221
+250,Rashid Khan,Afghanistan,1,0,1.1068,0.0545,0.0261,0.7187
+251,Rubel Hossain,Bangladesh,1,0,0.4324,0.0676,0.0271,0.984
+252,S Lamichhane,Nepal,1,0,0.5636,0.1091,0.0264,0.8906
+253,SC Williams,Zimbabwe,1,0,0.8232,0.0199,0.017,0.8508
+254,SL Malinga,Sri Lanka,1,0,0.7843,0.098,0.0302,0.8488
+255,SM Curran,England,1,0,0.9032,0.0415,0.0229,0.9131
+256,SM Sharif,Scotland,1,0,0.6446,0.0301,0.0294,0.7382
+257,SN Thakur,India,1,0,1.4432,0.0795,0.0289,0.9571
+258,SS Cottrell,West Indies,1,0,0.6182,0.0545,0.0304,0.8716
+259,Shadab Khan,Pakistan,1,0,0.7105,0.029,0.0234,0.89
+260,Shaheen Shah Afridi,Pakistan,1,0,0.5745,0.1064,0.0391,0.8643
+261,Shakib Al Hasan,Bangladesh,1,0,0.8298,0.0175,0.0225,0.7699
+262,Shoriful Islam,Bangladesh,1,0,0.7188,0.0938,0.0355,0.7836
+263,Sikandar Raza,Zimbabwe,1,0,0.8045,0.0196,0.0163,0.7952
+264,Simi Singh,Ireland,1,0,0.6312,0.0296,0.0237,0.7058
+265,Sompal Kami,Nepal,1,0,0.5771,0.022,0.0261,0.9216
+266,T Lungameni,Namibia,1,0,0.5,0.1364,0.0198,0.6627
+267,T Shamsi,South Africa,1,0,0.4595,0.0541,0.0223,0.9088
+268,TA Boult,New Zealand,1,0,0.8182,0.1364,0.0315,0.7579
+269,TG Southee,New Zealand,1,0,0.8876,0.0651,0.0222,0.8916
+270,TJ Murtagh,Ireland,1,0,0.4627,0.0597,0.0266,0.7159
+271,TK Curran,England,1,0,0.8889,0.0354,0.022,0.9174
+272,TL Chatara,Zimbabwe,1,0,0.4255,0.0851,0.0215,0.8753
+273,Taskin Ahmed,Bangladesh,1,0,0.4483,0.0603,0.0299,0.8214
+274,Usman Shinwari,Pakistan,1,0,0,1.0,0.0271,0.8571
+275,WB Rankin,Ireland,1,0,0.4154,0.0308,0.0253,0.692
+276,YS Chahal,India,1,0,0.5833,0.0556,0.0264,0.8911
