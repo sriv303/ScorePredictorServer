@@ -1,0 +1,17 @@
+6 batsman and 5 bowlers for each team inputted into a database, and same for other team can be stored inside a different database or csv file.
+In the same csv file, the venue should be stored as well.
+The ball by ball outputs for the python should be stored in a database, such that they can be aggregated individually for both teams afterwards.
+This should then be displayed, and the most recent scorecard for a certain user should be available to see after they login. Older scorecards should be deleted
+
+Primary key such as username can be used from the logins table and that will act as a foreign key in the results table. bowling and batting aggregated statistics should be stored under each player from both teams inside the users account using the primary key. 
+
+Batsman metric, bowler sr, batsman sr, bowler average, bowler economy rate should be stored next to player database such that they can be easily accessed instead of dynamically computing every time the program is run, because sometimes batsman metric is Nan, which causes issues.
+
+Its not required for machine learning model, and hence i will need to refine the is_data_sparse function through experimentation to determine the min no. balls between striker and bowler such that the model is used.
+
+Need to fix case where batsman are never out. Hence will remove all the batsman who do not obey the characteristics that i have set when adding the players table and remove all records from the database such that does there are no times where batsman have never been out. 
+
+bowler case fixed, need to update logic instead of using poisson distribution, can maybe use general statistcs. Remove option to score 5 runs from this distribution, such that only 0, 1, 2, 3, 4, 6 runs can be scored. Simulate over needs to be improved and use balls instead. 
+Strike should rotate if bowler is out or scores odd number of runs/new over. Should stop once 10 wickets have fallen or 50 overs are bowled.
+
+UI changes can be done later.
