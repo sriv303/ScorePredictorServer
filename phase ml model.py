@@ -44,14 +44,14 @@ model_wicket = Pipeline(steps=[('preprocessor', preprocessor),
                                ('regressor', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1))])
 
 # Fit the models
-model_runs.fit(X_train, y_runs_train)
-dump(model_runs, 'runs_model.joblib')
+'''model_runs.fit(X_train, y_runs_train)
+dump(model_runs, 'runs_model_byphase.joblib')
 
 model_wicket.fit(X_train, y_wicket_train)
-dump(model_wicket, 'wicket_model.joblib')
+dump(model_wicket, 'wicket_model_byphase.joblib')'''
 
-'''model_runs = load("runs_model.joblib")
-model_wicket = load("wicket_model.joblib")'''
+model_runs = load("runs_model_byphase.joblib")
+model_wicket = load("wicket_model_byphase.joblib")
 
 
 # Function to predict using player statistics
@@ -104,14 +104,14 @@ def is_data_sparse(striker, bowler):
 # Example usage:
 # Simulate the outcome of a ball
 venue = 'Holkar Cricket Stadium, Indore'
-striker = 'GJ Maxwell'
+striker = 'V Kohli'
 non_striker = 'Shubman Gill'
-bowler = 'JJ Bumrah'
-phase = 1
+bowler = 'JR Hazlewood'
+phase = 0
 total = 0
 wickets = 0
-for i in range(1, 31):
-    
+for i in range(1,6):
+    phase += 1
     runs, wicket = simulate_ball(venue, striker, non_striker, bowler, phase)
     total += runs
     print(f"Ball {i}: Predicted runs: {runs}, Predicted wicket: { wicket}")

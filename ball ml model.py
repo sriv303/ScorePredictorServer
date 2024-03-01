@@ -5,7 +5,9 @@ from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from joblib import dump, load
+from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the player statistics
 players_df = pd.read_csv("players.csv")
@@ -18,16 +20,23 @@ df = pd.read_csv("odi_match_data2.csv")
 df = df[['venue', 'striker', 'non_striker', 'bowler', 'runs_off_bat', 'is_wicket', 'ball']]
 
 # Encoding categorical variables
-categorical_features = ['venue', 'striker', 'non_striker', 'bowler', 'ball']
+categorical_features_runs = [ 'striker', 'bowler', 'ball']
+categorical_features_wickets = [ 'striker', 'bowler']
+
+
 categorical_transformer = Pipeline(steps=[
     ('onehot', OneHotEncoder(handle_unknown='ignore'))
 ])
 
-preprocessor = ColumnTransformer(
+preprocessor_runs = ColumnTransformer(
     transformers=[
-        ('cat', categorical_transformer, categorical_features)
+        ('cat', categorical_transformer, categorical_features_runs)
     ])
 
+preprocessor_wicket = ColumnTransformer(
+    transformers=[
+        ('cat', categorical_transformer, categorical_features_wickets)
+    ])
 # Split the data into features and target labels
 X = df.drop(columns=['runs_off_bat', 'is_wicket'])
 y_runs = df['runs_off_bat']
@@ -38,20 +47,28 @@ X_train, X_test, y_runs_train, y_runs_test, y_wicket_train, y_wicket_test = trai
     X, y_runs, y_wicket, test_size=0.2, random_state=42)
 
 # Create the models
-model_runs = Pipeline(steps=[('preprocessor', preprocessor),
+model_runs = Pipeline(steps=[('preprocessor', preprocessor_runs),
                              ('regressor', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1))])
-model_wicket = Pipeline(steps=[('preprocessor', preprocessor),
+model_wicket = Pipeline(steps=[('preprocessor', preprocessor_wicket),
                                ('regressor', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1))])
 
 # Fit the models
+
 model_runs.fit(X_train, y_runs_train)
-dump(model_runs, 'runs_model.joblib')
+dump(model_runs, 'runs_model_byball.joblib')
 
 model_wicket.fit(X_train, y_wicket_train)
-dump(model_wicket, 'wicket_model.joblib')
+dump(model_wicket, 'wicket_model_byball.joblib')
 
-'''model_runs = load("runs_model.joblib")
-model_wicket = load("wicket_model.joblib")'''
+model_runs = load("runs_model_byball.joblib")
+model_wicket = load("wicket_model_byball.joblib")
+
+y_runs_pred = model_runs.predict(X_test)
+mse_runs = mean_squared_error(y_runs_test, y_runs_pred)
+r2_runs = r2_score(y_runs_test, y_runs_pred)
+
+print(mse_runs, r2_runs)
+ 
 
 
 # Function to predict using player statistics
@@ -76,17 +93,19 @@ def predict_using_stats(striker, bowler):
     return predicted_runs, wicket_probability
 
 # Function to simulate a ball's outcome
-def simulate_ball(venue, striker, non_striker, bowler, ball):
-    if is_data_sparse(striker, bowler):
+def simulate_ball(striker, non_striker, bowler, ball):
+    if is_data_sparse(striker, bowler, ball):
         predicted_runs, wicket_probability = predict_using_stats(striker, bowler)
-        predicted_wicket = np.random.rand() < wicket_probability
+        #predicted_wicket = np.random.rand() < wicket_probability
+        predicted_wicket = wicket_probability
     else:
         # Prepare the input for the model
-        input_features = pd.DataFrame([[venue, striker, non_striker, bowler, ball]],
-                                      columns=['venue', 'striker', 'non_striker', 'bowler', 'ball'])
-        predicted_runs = model_runs.predict(input_features)[0]
-        predicted_runs = np.random.poisson(predicted_runs)
-        predicted_wicket = model_wicket.predict(input_features)[0]
+        input_features_runs = pd.DataFrame([[striker, bowler, ball]],
+                                      columns=['striker', 'bowler', 'ball'])
+        input_features_wicket = pd.DataFrame([[striker, bowler]],
+                                      columns=['striker','bowler'])
+        predicted_runs = model_runs.predict(input_features_runs)[0]
+        predicted_wicket = model_wicket.predict(input_features_wicket)[0]
 
     # Round predicted_runs and ensure it's not 5
     #predicted_runs = np.round(predicted_runs, 0).astype(int)
@@ -98,22 +117,24 @@ def simulate_ball(venue, striker, non_striker, bowler, ball):
     return predicted_runs, (predicted_wicket)
 
 
-def is_data_sparse(striker, bowler):
-    matches = df[(df['striker'] == striker) & (df['bowler'] == bowler)]
-    return len(matches) < 4
+def is_data_sparse(striker, bowler, ball):
+    matches = ((df[(df['striker'] == striker) & (df['bowler'] == bowler)]))
+    ball_matches = (df[(df['striker'] == striker) & (df['bowler'] == bowler) & (df['ball']==ball)])
+    return len(matches) < 4 or len(ball_matches) < 1
 
 # Example usage:
 # Simulate the outcome of a ball
 venue = 'Holkar Cricket Stadium, Indore'
-striker = 'GJ Maxwell'
-non_striker = 'Shubman Gill'
-bowler = 'JJ Bumrah'
-ball = 49.5
+striker = 'RG Sharma'
+non_striker = 'RG Sharma'
+bowler = 'A Zampa'
+ball = 8.0
 total = 0
 wickets = 0
-for i in range(1, 31):
-    
-    runs, wicket = simulate_ball(venue, striker, non_striker, bowler, ball)
+for i in range(1, 7):
+    ball += 0.1
+    ball.__round__(1)
+    runs, wicket = simulate_ball(striker, non_striker, bowler, ball)
     total += runs
     print(f"Ball {i}: Predicted runs: {runs}, Predicted wicket: {wicket}")
     wickets += wicket
