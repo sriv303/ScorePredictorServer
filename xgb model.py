@@ -7,7 +7,8 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from joblib import dump, load
 from sparse_distribution import simulate_outcome
-
+from ball_record import Ball
+import math
 
 # Load datasets
 df_matches = pd.read_csv("odi_match_data2.csv")
@@ -58,7 +59,7 @@ best_model = grid_search.best_estimator_
 
 #best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05
 
-model_runs.fit(X_train_runs, y_train_runs)
+'''model_runs.fit(X_train_runs, y_train_runs)
 model_wickets.fit(X_train_wickets, y_train_wickets)
 # Predictions
 y_pred_runs = model_runs.predict(X_test_runs)
@@ -75,7 +76,7 @@ print(f"Wickets Model - Accuracy: {accuracy_wickets}")
 
 # Save the models
 dump(model_runs, 'model_runs.joblib')
-dump(model_wickets, 'model_wickets.joblib')
+dump(model_wickets, 'model_wickets.joblib')'''
 
 
 runs_model = load('model_runs.joblib')
@@ -100,7 +101,7 @@ def predict_using_stats(striker, bowler):
     batsman_dismissal_rate = batsman_stats['dismissedPerBall']
     bowler_wicket_rate = bowler_stats['wicketsPerBall']
     if batsman_stats['isBatsman'] != 1:
-        wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 1.25
+        wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 2
     else:
         wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 2
 
@@ -110,10 +111,10 @@ def predict_using_stats(striker, bowler):
 
 # Function to simulate a ball's outcome
 def simulate_ball(striker, non_striker, bowler, phase):
+    wicket_probability = 0
     if is_data_sparse(striker, bowler, phase):
         predicted_runs, wicket_probability = predict_using_stats(striker, bowler)
         #predicted_wicket = np.random.rand() < wicket_probability
-        predicted_wicket = wicket_probability
     else:
         striker_data = df_players[df_players['name'] == striker]
         # Get the 'runsScoredPerBall' attribute
@@ -127,13 +128,24 @@ def simulate_ball(striker, non_striker, bowler, phase):
                                       columns=['striker', 'non_striker', 'bowler', 'phase', 'runsScoredPerBall', 'dismissedPerBall', 'wicketsPerBall', 'runsConcededPerBall' ])
         input_features_transformed = preprocessor.transform(input_features)
         predicted_runs = runs_model.predict(input_features_transformed)[0]
-        predicted_wicket = wickets_model.predict(input_features_transformed)[0]
+        predicted_runs = np.random.poisson(lam = predicted_runs)
+        wicket_probability = wickets_model.predict(input_features_transformed)[0]
     
-    
-    predicted_runs = predicted_runs if predicted_runs != 5 else 6
-    predicted_runs = min(predicted_runs, 6)
+    if wicket_probability > np.random.rand():
+        is_wicket = True
+    else:
+        is_wicket = False
 
-    return predicted_runs, (predicted_wicket)
+    if is_wicket:
+        predicted_runs = 0
+    else:
+        predicted_runs = predicted_runs if predicted_runs != 5 else 6
+        predicted_runs = min(predicted_runs, 6)
+    
+
+    return predicted_runs, is_wicket
+
+ball_list = []
 
 
 def is_data_sparse(striker, bowler, phase):
@@ -142,16 +154,56 @@ def is_data_sparse(striker, bowler, phase):
     return len(matches) < 4 or len(phase_matches) < 1
 
 
-striker = 'RG Sharma'
-non_striker = 'V Kohli'
-bowler = 'JR Hazlewood'
-phase = 1
-total = 0
-wickets = 0
-for i in range(1, 7):
-    runs, wicket = simulate_ball(striker, non_striker, bowler, phase)
-    total += runs
-    print(f"Ball {i}: Predicted runs: {runs}, Predicted wicket: {wicket}")
-    wickets += wicket
 
-print(str(total), str(wickets))
+
+def calculate_phase(over_number):
+    return (over_number // 10) + 1
+
+
+def simulate_over(bowler, striker, non_striker, next_batters, over_number, batter_index, wickets_fallen, total_runs):
+    phase = calculate_phase(over_number)
+    new_batter_index = batter_index
+    for i in range(1, 7):
+        runs, is_wicket = simulate_ball(striker, non_striker, bowler, phase)
+        ball_list.append(Ball(over_number, i, striker, bowler, runs, is_wicket))
+        ball_num = round(over_number + 0.1*i, 1)
+
+        print(f"Striker: {striker}, Bowler: {bowler}, Ball {ball_num}: Phase: {phase}, Runs: {runs}, Wicket: {is_wicket}")
+
+        total_runs += runs
+        if runs % 2 != 0:
+            striker, non_striker = non_striker, striker
+        if is_wicket:
+            if wickets_fallen < 9:
+                striker = next_batters[new_batter_index]
+                new_batter_index += 1
+            wickets_fallen += 1
+            if wickets_fallen == 10:
+                break
+    striker, non_striker = non_striker, striker
+    return wickets_fallen, striker, non_striker, new_batter_index, total_runs
+
+def simulate_innings(batter_list, bowler_list):
+    wickets_fallen = 0
+    batter_index = 2
+    striker, non_striker = batter_list[0], batter_list[1]
+    over_number = 0
+    total_runs = 0
+
+    while wickets_fallen < 10 and over_number < 50:
+        bowler = bowler_list[over_number % len(bowler_list)]
+        wickets_fallen, striker, non_striker, batter_index, total_runs = simulate_over(bowler, striker, non_striker, batter_list, over_number, batter_index, wickets_fallen, total_runs)
+        over_number += 1
+        if batter_index > len(batter_list):
+            break
+
+    print(f"Innings ended with {wickets_fallen} wickets fallen over {over_number} overs and total runs scored: {total_runs}.")
+
+# Example usage
+batter_list = ['KM Jadhav', 'V Kohli', 'RG Sharma', 'Shubman Gill', 'DA Miller', 'DA Warner', 
+               'MA Wood', 'MJ Henry', 'B Kumar', 'MJ Santner', 'JR Hazlewood']
+bowler_list = ['JJ Bumrah', 'A Zampa', 'A Nortje', 'Kuldeep Yadav', 'MA Starc']
+
+simulate_innings(batter_list, bowler_list)
+
+
