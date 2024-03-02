@@ -54,11 +54,11 @@ model_wicket = Pipeline(steps=[('preprocessor', preprocessor_wicket),
 
 # Fit the models
 
-model_runs.fit(X_train, y_runs_train)
+'''model_runs.fit(X_train, y_runs_train)
 dump(model_runs, 'runs_model_byball.joblib')
 
 model_wicket.fit(X_train, y_wicket_train)
-dump(model_wicket, 'wicket_model_byball.joblib')
+dump(model_wicket, 'wicket_model_byball.joblib')'''
 
 model_runs = load("runs_model_byball.joblib")
 model_wicket = load("wicket_model_byball.joblib")
