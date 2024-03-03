@@ -6,3 +6,4 @@ class Ball:
         self.runs_scored = runs_scored
         self.over_number = over_number
         self.is_wicket = is_wicket
+

@@ -10,6 +10,11 @@ from sparse_distribution import simulate_outcome
 from ball_record import Ball
 import math
 
+
+batter_list = ['KM Jadhav', 'V Kohli', 'RG Sharma', 'Shubman Gill', 'DA Miller', 'DA Warner', 
+               'MA Wood', 'MJ Henry', 'B Kumar', 'MJ Santner', 'JR Hazlewood']
+bowler_list = ['JJ Bumrah', 'A Zampa', 'A Nortje', 'Kuldeep Yadav', 'MA Starc']
+
 # Load datasets
 df_matches = pd.read_csv("odi_match_data2.csv")
 df_players = pd.read_csv("players.csv")
@@ -33,7 +38,7 @@ X_processed = preprocessor.fit_transform(X)
 
 
 # Split the data
-X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
+'''X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
 
 X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.transform(X), y_wickets, test_size=0.2, random_state=42)
 
@@ -41,10 +46,10 @@ X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_sp
 
 # Initialize and train the model
 model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
-model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
+model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)'''
 
 
-# Hyperparameter tuning (simplified example)
+'''# Hyperparameter tuning (simplified example)
 param_grid = {
     'n_estimators': [100, 200],
     'max_depth': [3, 5],
@@ -57,7 +62,7 @@ grid_search.fit(X_train_runs, y_train_runs)
 # Best model
 best_model = grid_search.best_estimator_
 
-#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05
+#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05'''
 
 '''model_runs.fit(X_train_runs, y_train_runs)
 model_wickets.fit(X_train_wickets, y_train_wickets)
@@ -147,6 +152,43 @@ def simulate_ball(striker, non_striker, bowler, phase):
 
 ball_list = []
 
+batting_stats = {batter: {'runs_scored': 0, 'balls_faced': 0, 'is_out': False} for batter in batter_list}
+bowling_stats = {bowler: {'overs_bowled': 0, 'runs_conceded': 0, 'wickets_taken': 0, 'balls_bowled': 0} for bowler in bowler_list}
+
+
+
+def update_batting_stats(batsman, runs, is_wicket, bowler):
+    batting_stats[batsman]["runs_scored"] += runs
+    batting_stats[batsman]["balls_faced"] += 1
+    if is_wicket:
+        batting_stats[batsman]["is_out"] = True
+        batting_stats[batsman]["dismissed_by"] = bowler
+
+
+
+def update_bowling_stats(bowler, runs, is_wicket):
+    bowling_stats[bowler]['runs_conceded'] += runs
+    bowling_stats[bowler]['balls_bowled'] += 1
+    if is_wicket:
+        bowling_stats[bowler]['wickets_taken'] += 1
+
+def print_statistics():
+    print("\nBatting Statistics:")
+    for batter, stats in batting_stats.items():
+        if stats['is_out']:
+            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, "
+      f"Dismissed by {stats['dismissed_by']}")
+        else:
+            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}")
+
+    print("\nBowling Statistics:")
+    for bowler, stats in bowling_stats.items():
+        overs, partial_overs = divmod(stats['balls_bowled'], 6)
+        overs_bowled = f"{overs}.{partial_overs}"
+        economy_rate = stats['runs_conceded'] / (stats['balls_bowled'] / 6) if stats['balls_bowled'] > 0 else 0
+        print(f"{bowler}: Overs Bowled = {overs_bowled}, Runs Conceded = {stats['runs_conceded']}, Wickets Taken = {stats['wickets_taken']}, Economy Rate = {economy_rate:.2f}")
+
+
 
 def is_data_sparse(striker, bowler, phase):
     matches = ((df_matches[(df_matches['striker'] == striker) & (df_matches['bowler'] == bowler)]))
@@ -167,6 +209,8 @@ def simulate_over(bowler, striker, non_striker, next_batters, over_number, batte
         runs, is_wicket = simulate_ball(striker, non_striker, bowler, phase)
         ball_list.append(Ball(over_number, i, striker, bowler, runs, is_wicket))
         ball_num = round(over_number + 0.1*i, 1)
+        update_batting_stats(striker, runs, is_wicket, bowler)
+        update_bowling_stats(bowler, runs, is_wicket)
 
         print(f"Striker: {striker}, Bowler: {bowler}, Ball {ball_num}: Phase: {phase}, Runs: {runs}, Wicket: {is_wicket}")
 
@@ -198,12 +242,15 @@ def simulate_innings(batter_list, bowler_list):
             break
 
     print(f"Innings ended with {wickets_fallen} wickets fallen over {over_number} overs and total runs scored: {total_runs}.")
+    print_statistics()
 
 # Example usage
-batter_list = ['KM Jadhav', 'V Kohli', 'RG Sharma', 'Shubman Gill', 'DA Miller', 'DA Warner', 
-               'MA Wood', 'MJ Henry', 'B Kumar', 'MJ Santner', 'JR Hazlewood']
-bowler_list = ['JJ Bumrah', 'A Zampa', 'A Nortje', 'Kuldeep Yadav', 'MA Starc']
+
 
 simulate_innings(batter_list, bowler_list)
 
+
+
+# Call print_statistics() at the end of simulate_innings function to display the stats
+        
 
