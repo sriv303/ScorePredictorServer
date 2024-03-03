@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
+from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, f1_score
 from xgboost import XGBRegressor
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
@@ -70,6 +70,7 @@ model_wickets.fit(X_train_wickets, y_train_wickets)
 y_pred_runs = model_runs.predict(X_test_runs)
 mse_runs = mean_squared_error(y_test_runs, y_pred_runs)
 r2_runs = r2_score(y_test_runs, y_pred_runs)
+f1_runs = f1_score(y_test_runs, y_pred_runs)
 
 y_pred_wickets = model_wickets.predict(X_test_wickets)
 # Since model_wickets predicts probabilities, threshold to classify wickets
@@ -78,6 +79,7 @@ accuracy_wickets = accuracy_score(y_test_wickets, y_pred_wickets_binary)
 
 print(f"Runs Model - MSE: {mse_runs}, R^2: {r2_runs}")
 print(f"Wickets Model - Accuracy: {accuracy_wickets}")
+print(f"Runs model - F1: {f1_runs}:)
 
 # Save the models
 dump(model_runs, 'model_runs.joblib')
@@ -105,10 +107,8 @@ def predict_using_stats(striker, bowler):
     # Calculate wicket probability
     batsman_dismissal_rate = batsman_stats['dismissedPerBall']
     bowler_wicket_rate = bowler_stats['wicketsPerBall']
-    if batsman_stats['isBatsman'] != 1:
-        wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 2
-    else:
-        wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 2
+    wicket_probability = (batsman_dismissal_rate + bowler_wicket_rate) / 2
+    
 
 
     
