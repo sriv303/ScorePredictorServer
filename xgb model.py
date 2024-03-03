@@ -250,7 +250,6 @@ def simulate_innings(batter_list, bowler_list):
 simulate_innings(batter_list, bowler_list)
 
 
-
 # Call print_statistics() at the end of simulate_innings function to display the stats
         
 
