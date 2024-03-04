@@ -38,7 +38,7 @@ X_processed = preprocessor.fit_transform(X)
 
 
 # Split the data
-'''X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
+X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
 
 X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.transform(X), y_wickets, test_size=0.2, random_state=42)
 
@@ -46,10 +46,10 @@ X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_sp
 
 # Initialize and train the model
 model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
-model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)'''
+model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
 
 
-'''# Hyperparameter tuning (simplified example)
+# Hyperparameter tuning (simplified example)
 param_grid = {
     'n_estimators': [100, 200],
     'max_depth': [3, 5],
@@ -62,28 +62,27 @@ grid_search.fit(X_train_runs, y_train_runs)
 # Best model
 best_model = grid_search.best_estimator_
 
-#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05'''
+#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05
 
-'''model_runs.fit(X_train_runs, y_train_runs)
+model_runs.fit(X_train_runs, y_train_runs)
 model_wickets.fit(X_train_wickets, y_train_wickets)
 # Predictions
 y_pred_runs = model_runs.predict(X_test_runs)
 mse_runs = mean_squared_error(y_test_runs, y_pred_runs)
 r2_runs = r2_score(y_test_runs, y_pred_runs)
-f1_runs = f1_score(y_test_runs, y_pred_runs)
 
 y_pred_wickets = model_wickets.predict(X_test_wickets)
 # Since model_wickets predicts probabilities, threshold to classify wickets
 y_pred_wickets_binary = (y_pred_wickets >= 0.5).astype(int)
+
 accuracy_wickets = accuracy_score(y_test_wickets, y_pred_wickets_binary)
 
 print(f"Runs Model - MSE: {mse_runs}, R^2: {r2_runs}")
 print(f"Wickets Model - Accuracy: {accuracy_wickets}")
-print(f"Runs model - F1: {f1_runs}:)
 
 # Save the models
 dump(model_runs, 'model_runs.joblib')
-dump(model_wickets, 'model_wickets.joblib')'''
+dump(model_wickets, 'model_wickets.joblib')
 
 
 runs_model = load('model_runs.joblib')
@@ -175,11 +174,14 @@ def update_bowling_stats(bowler, runs, is_wicket):
 def print_statistics():
     print("\nBatting Statistics:")
     for batter, stats in batting_stats.items():
+        strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
         if stats['is_out']:
-            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, "
+            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}, "
       f"Dismissed by {stats['dismissed_by']}")
+        elif stats['balls_faced'] > 0:
+            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}")
         else:
-            print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}")
+            print(batter + "did not bat")
 
     print("\nBowling Statistics:")
     for bowler, stats in bowling_stats.items():
