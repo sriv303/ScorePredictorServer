@@ -33,12 +33,12 @@ y_wickets = df_matches['is_wicket'].astype(int)
 categorical_features = [ 'striker', 'non_striker', 'bowler', 'phase']
 preprocessor = ColumnTransformer(transformers=[('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)], remainder='passthrough')
 
-X_processed = preprocessor.fit_transform(X)
+#X_processed = preprocessor.fit_transform(X)
 
 
 
 # Split the data
-X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
+'''X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
 
 X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.transform(X), y_wickets, test_size=0.2, random_state=42)
 
@@ -46,10 +46,10 @@ X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_sp
 
 # Initialize and train the model
 model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
-model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
+model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)'''
 
 
-# Hyperparameter tuning (simplified example)
+'''# Hyperparameter tuning (simplified example)
 param_grid = {
     'n_estimators': [100, 200],
     'max_depth': [3, 5],
@@ -62,9 +62,9 @@ grid_search.fit(X_train_runs, y_train_runs)
 # Best model
 best_model = grid_search.best_estimator_
 
-#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05
+#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05'''
 
-model_runs.fit(X_train_runs, y_train_runs)
+'''model_runs.fit(X_train_runs, y_train_runs)
 model_wickets.fit(X_train_wickets, y_train_wickets)
 # Predictions
 y_pred_runs = model_runs.predict(X_test_runs)
@@ -82,7 +82,7 @@ print(f"Wickets Model - Accuracy: {accuracy_wickets}")
 
 # Save the models
 dump(model_runs, 'model_runs.joblib')
-dump(model_wickets, 'model_wickets.joblib')
+dump(model_wickets, 'model_wickets.joblib')'''
 
 
 runs_model = load('model_runs.joblib')
