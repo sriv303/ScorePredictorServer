@@ -33,12 +33,12 @@ y_wickets = df_matches['is_wicket'].astype(int)
 categorical_features = [ 'striker', 'non_striker', 'bowler', 'phase']
 preprocessor = ColumnTransformer(transformers=[('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)], remainder='passthrough')
 
-#X_processed = preprocessor.fit_transform(X)
+X_processed = preprocessor.fit_transform(X)
 
 
 
 # Split the data
-'''X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
+X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
 
 X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.transform(X), y_wickets, test_size=0.2, random_state=42)
 
@@ -46,7 +46,7 @@ X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_sp
 
 # Initialize and train the model
 model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
-model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)'''
+model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
 
 
 '''# Hyperparameter tuning (simplified example)
@@ -174,14 +174,15 @@ def update_bowling_stats(bowler, runs, is_wicket):
 def print_statistics():
     print("\nBatting Statistics:")
     for batter, stats in batting_stats.items():
-        strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
         if stats['is_out']:
+            strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
             print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}, "
       f"Dismissed by {stats['dismissed_by']}")
         elif stats['balls_faced'] > 0:
+            strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
             print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}")
         else:
-            print(batter + "did not bat")
+            print(batter + " did not bat")
 
     print("\nBowling Statistics:")
     for bowler, stats in bowling_stats.items():
