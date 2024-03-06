@@ -11,7 +11,7 @@ from ball_record import Ball
 import math
 
 
-batter_list = ['KM Jadhav', 'V Kohli', 'RG Sharma', 'Shubman Gill', 'DA Miller', 'DA Warner', 
+batter_list = ['PJ Cummins', 'RG Sharma', 'DA Warner', 'V Kohli', 'DA Miller', 'KM Jadhav', 
                'MA Wood', 'MJ Henry', 'B Kumar', 'MJ Santner', 'JR Hazlewood']
 bowler_list = ['JJ Bumrah', 'A Zampa', 'A Nortje', 'Kuldeep Yadav', 'MA Starc']
 
@@ -143,7 +143,7 @@ def simulate_ball(striker, non_striker, bowler, phase):
     if is_wicket:
         predicted_runs = 0
     else:
-        predicted_runs = predicted_runs if predicted_runs != 5 else 6
+        predicted_runs = predicted_runs if predicted_runs != 5  else 6
         predicted_runs = min(predicted_runs, 6)
     
 
@@ -256,3 +256,5 @@ simulate_innings(batter_list, bowler_list)
 # Call print_statistics() at the end of simulate_innings function to display the stats
         
 
+
+        
