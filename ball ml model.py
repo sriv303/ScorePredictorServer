@@ -10,7 +10,7 @@ from joblib import dump, load
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the player statistics
-players_df = pd.read_csv("players.csv")
+'''players_df = pd.read_csv("players.csv")
 
 # Load the match data
 df = pd.read_csv("odi_match_data2.csv")
@@ -54,25 +54,28 @@ model_wicket = Pipeline(steps=[('preprocessor', preprocessor_wicket),
 
 # Fit the models
 
-'''model_runs.fit(X_train, y_runs_train)
+model_runs.fit(X_train, y_runs_train)
 dump(model_runs, 'runs_model_byball.joblib')
 
 model_wicket.fit(X_train, y_wicket_train)
-dump(model_wicket, 'wicket_model_byball.joblib')'''
+dump(model_wicket, 'wicket_model_byball.joblib')
 
 model_runs = load("runs_model_byball.joblib")
 model_wicket = load("wicket_model_byball.joblib")
 
 y_runs_pred = model_runs.predict(X_test)
-mse_runs = mean_squared_error(y_runs_test, y_runs_pred)
-r2_runs = r2_score(y_runs_test, y_runs_pred)
+y_wicket_pred = model_wicket.predict(X_test)
+mse_runs = round(mean_squared_error(y_runs_test, y_runs_pred), 4)
+r2_runs = round(r2_score(y_runs_test, y_runs_pred), 4)
+r2_wickets = round(r2_score(y_wicket_test, y_wicket_pred), 4)'''
 
-print(mse_runs, r2_runs)
+print(f"Runs MSE 2.1392, Runs R^2 -0.2945, Wicket R^2 -0.0932")
+
  
 
 
 # Function to predict using player statistics
-def predict_using_stats(striker, bowler):
+'''def predict_using_stats(striker, bowler):
     batsman_stats = players_df[players_df['name'] == striker].iloc[0]
     bowler_stats = players_df[players_df['name'] == bowler].iloc[0]
 
@@ -139,4 +142,4 @@ for i in range(1, 7):
     print(f"Ball {i}: Predicted runs: {runs}, Predicted wicket: {wicket}")
     wickets += wicket
 
-print(str(total), str(wickets))
+print(str(total), str(wickets))'''
