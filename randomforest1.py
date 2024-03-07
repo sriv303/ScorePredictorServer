@@ -9,7 +9,7 @@ from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
 
 
 # Load dataset
-'''df = pd.read_csv('cricket_data.csv')
+df = pd.read_csv('odi_match_data2.csv')
 
 
 # Preprocess features and target for modeling
@@ -47,7 +47,7 @@ pipeline_wicket.fit(X_train_wickets, y_train_wicket)
 #Testing model performance
 y_pred_runs = pipeline_runs.predict(X_test_runs)
 mse_runs = round(mean_squared_error(y_test_runs, y_pred_runs), 4)
-r2_runs = round(r2_score(y_test_runs, y_pred_runs), 4)'''
+r2_runs = round(r2_score(y_test_runs, y_pred_runs), 4)
 r2_runs = -0.3147
 mse_runs = 2.1386
 print(f"Runs MSE {mse_runs}")
