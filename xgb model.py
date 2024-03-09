@@ -19,8 +19,7 @@ bowler_list = ['JJ Bumrah', 'A Zampa', 'A Nortje', 'Kuldeep Yadav', 'MA Starc']
 df_matches = pd.read_csv("odi_match_data2.csv")
 df_players = pd.read_csv("players.csv")
 
-# Example of merging player statistics into the match data
-# Assuming 'striker' and 'bowler' columns in df_matches match 'name' in df_players
+#merging player statistics into the match data
 df_matches = df_matches.merge(df_players[['name', 'runsScoredPerBall', 'dismissedPerBall']], left_on='striker', right_on='name', how='left')
 df_matches = df_matches.merge(df_players[['name', 'wicketsPerBall', 'runsConcededPerBall']], left_on='bowler', right_on='name', how='left')
 
@@ -38,35 +37,37 @@ X_processed = preprocessor.fit_transform(X)
 
 
 # Split the data
-X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(X_processed, y_runs, test_size=0.2, random_state=42)
+X_train_runs, X_test_runs, y_train_runs, y_test_runs = train_test_split(preprocessor.fit_transform(X), y_runs, test_size=0.2, random_state=42)
 
-X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.transform(X), y_wickets, test_size=0.2, random_state=42)
+X_train_wickets, X_test_wickets, y_train_wickets, y_test_wickets = train_test_split(preprocessor.fit_transform(X), y_wickets, test_size=0.2, random_state=42)
 
 
 
 # Initialize and train the model
-model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
-model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=100, max_depth=5, learning_rate=0.05, random_state=42)
+'''model_runs = XGBRegressor(objective='reg:squarederror', n_estimators=300, max_depth=4, learning_rate=0.025, random_state=42)
+model_wickets = XGBRegressor(objective='binary:logistic', n_estimators=300, max_depth=4, learning_rate=0.025, random_state=42)
 
 
-'''# Hyperparameter tuning (simplified example)
+# Hyperparameter tuning
 param_grid = {
-    'n_estimators': [100, 200],
-    'max_depth': [3, 5],
-    'learning_rate': [0.05, 0.1]
+    'n_estimators': [100, 200, 300],
+    'max_depth': [3, 4, 5, 6],
+    'learning_rate': [0.025, 0.05, 0.1, 0.15, 0.2]
 }
 
 grid_search = GridSearchCV(model_runs, param_grid, cv=5, scoring='neg_mean_squared_error', n_jobs=-1)
 grid_search.fit(X_train_runs, y_train_runs)
 
-# Best model
-best_model = grid_search.best_estimator_
+# Print the best hyperparameters
+print("Best hyperparameters:", grid_search.best_params_)
 
-#best params were found to be n_estimators = 100, max_depth = 5, lr = 0.05'''
 
-'''model_runs.fit(X_train_runs, y_train_runs)
+model_runs.fit(X_train_runs, y_train_runs)
 model_wickets.fit(X_train_wickets, y_train_wickets)
-# Predictions
+
+
+
+#Calculate performance metrics
 y_pred_runs = model_runs.predict(X_test_runs)
 mse_runs = mean_squared_error(y_test_runs, y_pred_runs)
 r2_runs = r2_score(y_test_runs, y_pred_runs)
@@ -84,23 +85,15 @@ print(f"Wickets Model - Accuracy: {accuracy_wickets}")
 dump(model_runs, 'model_runs.joblib')
 dump(model_wickets, 'model_wickets.joblib')'''
 
-
+#Load the models
 runs_model = load('model_runs.joblib')
 wickets_model = load('model_wickets.joblib')
 
 
+#Simulates outcome when data is sparse
 def predict_using_stats(striker, bowler):
     batsman_stats = df_players[df_players['name'] == striker].iloc[0]
     bowler_stats = df_players[df_players['name'] == bowler].iloc[0]
-
-    '''# Calculate weighted runs based on batsman and bowler stats
-    batsman_runs_per_ball = batsman_stats['runsScoredPerBall']
-    bowler_runs_per_ball = bowler_stats['runsConcededPerBall']
-    lambda_runs = (batsman_runs_per_ball + bowler_runs_per_ball) / 2
-
-    # Predict runs using Poisson distribution
-    predicted_runs = np.random.poisson(lambda_runs)'''
-    
     predicted_runs = simulate_outcome(striker, bowler)
 
     # Calculate wicket probability
@@ -118,22 +111,24 @@ def simulate_ball(striker, non_striker, bowler, phase):
     wicket_probability = 0
     if is_data_sparse(striker, bowler, phase):
         predicted_runs, wicket_probability = predict_using_stats(striker, bowler)
-        #predicted_wicket = np.random.rand() < wicket_probability
     else:
         striker_data = df_players[df_players['name'] == striker]
-        # Get the 'runsScoredPerBall' attribute
+        # Get the statistics attributes
         runsScoredPerBall = striker_data['runsScoredPerBall'].iloc[0]
         dismissedPerBall = striker_data['dismissedPerBall'].iloc[0]
         bowler_data = df_players[df_players['name'] == bowler]
         wicketsPerBall = bowler_data['wicketsPerBall'].iloc[0]
         runsConcededPerBall = bowler_data['runsConcededPerBall'].iloc[0]
         # Prepare the input for the model
-        input_features = pd.DataFrame([[striker, non_striker, bowler, phase, runsScoredPerBall, dismissedPerBall, wicketsPerBall, runsConcededPerBall]],
-                                      columns=['striker', 'non_striker', 'bowler', 'phase', 'runsScoredPerBall', 'dismissedPerBall', 'wicketsPerBall', 'runsConcededPerBall' ])
+        input_features = pd.DataFrame([[striker, non_striker, bowler, phase, runsScoredPerBall,
+                                        dismissedPerBall, wicketsPerBall, runsConcededPerBall]],
+                                      columns=['striker', 'non_striker', 'bowler', 'phase',
+                                               'runsScoredPerBall', 'dismissedPerBall',
+                                               'wicketsPerBall', 'runsConcededPerBall' ])
         input_features_transformed = preprocessor.transform(input_features)
         predicted_runs = runs_model.predict(input_features_transformed)[0]
-        predicted_runs = np.random.poisson(lam = predicted_runs)
         wicket_probability = wickets_model.predict(input_features_transformed)[0]
+        predicted_runs = np.random.poisson(lam = predicted_runs)
     
     if wicket_probability > np.random.rand():
         is_wicket = True
@@ -157,8 +152,10 @@ bowling_stats = {bowler: {'overs_bowled': 0, 'runs_conceded': 0, 'wickets_taken'
 
 
 def update_batting_stats(batsman, runs, is_wicket, bowler):
+    #Add stats to dictionary
     batting_stats[batsman]["runs_scored"] += runs
     batting_stats[batsman]["balls_faced"] += 1
+    #Set dismissed by property
     if is_wicket:
         batting_stats[batsman]["is_out"] = True
         batting_stats[batsman]["dismissed_by"] = bowler
@@ -173,26 +170,32 @@ def update_bowling_stats(bowler, runs, is_wicket):
 
 def print_statistics():
     print("\nBatting Statistics:")
+    #Looping through batters
     for batter, stats in batting_stats.items():
         if stats['is_out']:
+            #For batsman who are out
             strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
             print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}, "
       f"Dismissed by {stats['dismissed_by']}")
         elif stats['balls_faced'] > 0:
+            #Batsman who batted but not out
             strike_rate = round((stats['runs_scored']/stats['balls_faced'])*100, 2)
             print(f"{batter}: Runs Scored = {stats['runs_scored']}, Balls Faced = {stats['balls_faced']}, Strike rate = {strike_rate}")
         else:
+            #Never batted
             print(batter + " did not bat")
 
     print("\nBowling Statistics:")
     for bowler, stats in bowling_stats.items():
         overs, partial_overs = divmod(stats['balls_bowled'], 6)
+        #Calculating whole number of overs and then number of balls in partial over
         overs_bowled = f"{overs}.{partial_overs}"
         economy_rate = stats['runs_conceded'] / (stats['balls_bowled'] / 6) if stats['balls_bowled'] > 0 else 0
-        print(f"{bowler}: Overs Bowled = {overs_bowled}, Runs Conceded = {stats['runs_conceded']}, Wickets Taken = {stats['wickets_taken']}, Economy Rate = {economy_rate:.2f}")
+        print(f"{bowler}: Overs Bowled = {overs_bowled}, Runs Conceded = {stats['runs_conceded']}, "
+              f"Wickets Taken = {stats['wickets_taken']}, Economy Rate = {economy_rate:.2f}")
 
 
-
+#Define when data is sparse, returns Bool
 def is_data_sparse(striker, bowler, phase):
     matches = ((df_matches[(df_matches['striker'] == striker) & (df_matches['bowler'] == bowler)]))
     phase_matches = (df_matches[(df_matches['striker'] == striker) & (df_matches['bowler'] == bowler) & (df_matches['phase']==phase)])
@@ -200,14 +203,17 @@ def is_data_sparse(striker, bowler, phase):
 
 
 
-
+#Calculate phase based on over number
 def calculate_phase(over_number):
     return (over_number // 10) + 1
 
 
+
+#Simulate entire over, update total statistics
 def simulate_over(bowler, striker, non_striker, next_batters, over_number, batter_index, wickets_fallen, total_runs):
     phase = calculate_phase(over_number)
     new_batter_index = batter_index
+    #Simulate each ball in over
     for i in range(1, 7):
         runs, is_wicket = simulate_ball(striker, non_striker, bowler, phase)
         ball_list.append(Ball(over_number, i, striker, bowler, runs, is_wicket))
@@ -220,6 +226,7 @@ def simulate_over(bowler, striker, non_striker, next_batters, over_number, batte
         total_runs += runs
         if runs % 2 != 0:
             striker, non_striker = non_striker, striker
+        #Stopping condition
         if is_wicket:
             if wickets_fallen < 9:
                 striker = next_batters[new_batter_index]
@@ -232,28 +239,29 @@ def simulate_over(bowler, striker, non_striker, next_batters, over_number, batte
 
 def simulate_innings(batter_list, bowler_list):
     wickets_fallen = 0
-    batter_index = 2
+    batter_index = 2 #this was previously set as 1, but caused 2nd batsman to duplicate if first batter got out
     striker, non_striker = batter_list[0], batter_list[1]
     over_number = 0
     total_runs = 0
-
+    
+    #While loop, stopping condition ends innings
     while wickets_fallen < 10 and over_number < 50:
         bowler = bowler_list[over_number % len(bowler_list)]
-        wickets_fallen, striker, non_striker, batter_index, total_runs = simulate_over(bowler, striker, non_striker, batter_list, over_number, batter_index, wickets_fallen, total_runs)
+        #Over simulation
+        wickets_fallen, striker, non_striker, batter_index, total_runs = simulate_over(bowler,
+            striker, non_striker, batter_list, over_number, batter_index, wickets_fallen, total_runs)
         over_number += 1
         if batter_index > len(batter_list):
             break
 
     print(f"Innings ended with {wickets_fallen} wickets fallen over {over_number} overs and total runs scored: {total_runs}.")
     print_statistics()
-
-# Example usage
+    return ball_list
 
 
 simulate_innings(batter_list, bowler_list)
 
 
-# Call print_statistics() at the end of simulate_innings function to display the stats
         
 
 
