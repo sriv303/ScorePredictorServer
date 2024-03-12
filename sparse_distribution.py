@@ -5,7 +5,7 @@ import numpy as np
 
 
 def simulate_outcome(striker, bowler):
-    df = pd.read_csv("odi_match_data2.csv")
+    df = pd.read_csv("match_data.csv")
     # Filter for the specific striker
     df_striker = df[df['striker'] == striker]
 

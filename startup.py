@@ -1,6 +1,7 @@
 import xgb_model as xgb
 import sqlite3 as sql
 import json
+import sys
 
 connectionString = "C://Users//Abhi//Documents//Schoolwork//Computer Science//ScorePredictor//PredictorUI//Database//CricketPredictorDB.db"
 
@@ -25,5 +26,7 @@ def getRecords(match_id):
     
     bl1, fis = xgb.simulate_innings(data1, data2, 1, 0)
     bl2, sis = xgb.simulate_innings(data3, data4, 2, fis)
+
+prm = int(sys.argv[1])
     
-(getRecords(3))
+(getRecords(prm))
