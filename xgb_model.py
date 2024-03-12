@@ -219,7 +219,7 @@ def simulate_over(bowler, striker, non_striker, next_batters, over_number, batte
     #Simulate each ball in over
     for i in range(1, 7):
         runs, is_wicket = simulate_ball(striker, non_striker, bowler, phase)
-        ball_list.append(Ball(over_number, i, striker, bowler, runs, is_wicket))
+        ball_list.append(Ball(over_number, i, striker, bowler, int(runs), is_wicket, innings))
         ball_num = round(over_number + 0.1*i, 1)
         update_batting_stats(striker, runs, is_wicket, bowler)
         update_bowling_stats(bowler, runs, is_wicket)

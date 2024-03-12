@@ -1,9 +1,11 @@
 class Ball:
-    def __init__(self, over_number, ball_number, striker, bowler, runs_scored, is_wicket):
+    def __init__(self, over_number, ball_number, striker, bowler, runs_scored, is_wicket, innings):
         self.ball_number = ball_number
         self.striker = striker
         self.bowler = bowler
         self.runs_scored = runs_scored
         self.over_number = over_number
         self.is_wicket = is_wicket
+        self.innings = innings
+
 
