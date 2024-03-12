@@ -69,6 +69,8 @@ mse_runs = round(mean_squared_error(y_runs_test, y_runs_pred), 4)
 r2_runs = round(r2_score(y_runs_test, y_runs_pred), 4)
 r2_wickets = round(r2_score(y_wicket_test, y_wicket_pred), 4)'''
 
+
+
 print(f"Runs MSE 2.1392, Runs R^2 -0.2945, Wicket R^2 -0.0932")
 
  
