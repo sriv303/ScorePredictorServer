@@ -54,4 +54,4 @@ def getRecords(match_id):
 
 prm = int(sys.argv[1])
    
-#getRecords(10)
+getRecords(prm)

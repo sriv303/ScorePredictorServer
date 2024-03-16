@@ -270,7 +270,7 @@ def simulate_innings(batter_list1, bowler_list1, innings, first_innings_score):
         if batter_index > len(batter_list):
             break
 
-    print(f"Innings ended with {wickets_fallen} wickets fallen over {over_number} overs and total runs scored: {total_runs}.")
+    #print(f"Innings ended with {wickets_fallen} wickets fallen over {over_number} overs and total runs scored: {total_runs}.")
     #print_statistics()
     return ball_list, total_runs
 
