@@ -49,7 +49,7 @@ def getRecords(match_id):
     cur.execute(updateQuery)
     conn.commit()
     conn.close()
-    print("success")
+    print("Success")
 
 
 prm = int(sys.argv[1])
