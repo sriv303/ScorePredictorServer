@@ -17,6 +17,7 @@ class MyObjectEncoder(json.JSONEncoder):
 
 
 connectionString = "C://Users//Abhi//Documents//Schoolwork//Computer Science//ScorePredictor//PredictorUI//Database//CricketPredictorDB.db"
+#change this to path of database
 
 def getRecords(match_id):
     conn = sql.connect(connectionString)
