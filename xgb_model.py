@@ -130,9 +130,9 @@ def simulate_ball(striker, non_striker, bowler, phase):
         input_features_transformed = preprocessor.transform(input_features)
         predicted_runs = runs_model.predict(input_features_transformed)[0]
         wicket_probability = wickets_model.predict(input_features_transformed)[0]
-        predicted_runs = np.random.poisson(lam = predicted_runs)
+        predicted_runs = np.random.poisson(lam = predicted_runs*1.2)
     
-    if wicket_probability > np.random.rand():
+    if wicket_probability/1.2 > np.random.rand():
         is_wicket = True
     else:
         is_wicket = False
